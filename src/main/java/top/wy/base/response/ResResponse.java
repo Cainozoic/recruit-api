@@ -58,5 +58,11 @@ public class ResResponse {
         return new ResResponse(1, msg, data);
     }
 
+    public static ResResponse createFaildResponse(String info){
+        ResResponse resResponse = new ResResponse(0, "");
+        resResponse.setInfo(info);
+        return resResponse;
+    }
+
 
 }
