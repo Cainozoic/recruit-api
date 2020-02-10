@@ -2,6 +2,7 @@ package top.wy.base.filter;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import top.wy.base.context.WebContext;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -27,7 +28,9 @@ public class BaseFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-        log.info("request.log.url = {}",request.getRequestURL());
+        WebContext.setRequestAndResponse(request,response);
+        String token = request.getHeader("token");
+        WebContext.setToken(token);
         chain.doFilter(request,response);
     }
 }
